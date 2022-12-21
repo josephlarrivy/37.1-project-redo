@@ -8,6 +8,9 @@ app.get('/', (req, res, next) => {
 });
 
 app.get('/mean', (req, res, next) => {
+    if (!req.query.numbers) {
+        throw new ExpressError('need query string with numbers', 400)
+    }
     try {
         let numsArr = [];
         let numsAsStrings = req.query.numbers.split(',');
@@ -35,6 +38,9 @@ app.get('/mean', (req, res, next) => {
 
 
 app.get('/median', (req, res, next) => {
+    if (!req.query.numbers) {
+        throw new ExpressError('need query string with numbers', 400)
+    }
     const median = (arr) => {
         return arr.slice().sort((a, b) => a - b)[Math.floor(arr.length / 2)];
     };
@@ -61,6 +67,9 @@ app.get('/median', (req, res, next) => {
 
 
 app.get('/mode', (req, res, next) => {
+    if (!req.query.numbers) {
+        throw new ExpressError('need query string with numbers', 400)
+    }
     res.json({
         "response": {
             "operation": "x",
